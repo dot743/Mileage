@@ -1,0 +1,78 @@
+{% extends 'tracker/base.html' %}
+
+{% block content %}
+	<script>
+		function newSelectBox(places) {
+			var stopsContainer = document.getElementById('stops-container');
+			var stopsLen = stopsContainer.children.length;
+			console.log(places)
+			var idPrefix = 'stop'
+			var newDivId = stopsLen + 1;
+
+			var newDiv = document.createElement('div');
+			var lineBreak = document.createElement('hr')
+			lineBreak.classList.add('my-3')
+			newDiv.appendChild(lineBreak)
+
+			var newLabel = document.createElement('label');
+			newLabel.id = 'stop'+newDivId.toString();
+			newLabel.innerHTML = 'Stop ' + newDivId.toString();
+
+			var newSelect = document.createElement('select');
+			newSelect.setAttribute('name', 'stop'+newDivId.toString());
+			newSelect.classList.add('form-control')
+
+			newLabel.appendChild(newSelect);
+			newDiv.appendChild(newLabel)
+
+			var blankOption = document.createElement('option');
+			blankOption.value = ''
+			blankOption.setAttribute('disabled', 'disabled');
+			blankOption.setAttribute('selected', 'selected');
+			newSelect.appendChild(blankOption);
+			newSelect.setAttribute('required', 'required');
+
+			console.log(stopsLen, stopsContainer);
+			places.map(place => {
+				var newOption = document.createElement('option');
+				newOption.value = place.pk;
+				newOption.innerHTML = place.fields.name;
+				newSelect.appendChild(newOption);
+			})
+			stopsContainer.appendChild(newDiv);
+			console.log(stopsContainer.children[0].id)
+		}
+	</script>
+	<div class='container-fluid'>
+		<div class='text-center'>
+			<h1>Create Trip</h1>
+		</div>
+		<div class='container'>
+			<button class='btn btn-lg btn-primary my-3' onclick='newSelectBox({{places_json}})'>Add Stop</button>
+			<form class='form-control' method='post' action=''>
+				{% csrf_token %}
+				<label for='date'>
+					What date did this occur on?
+					<input name='date' type='date' class='form-control' required />
+				</label>
+				<div id="stops-container">
+					<div>
+						<hr class='my-3' />
+						<label id="stop1">
+							Stop 1:
+							<select name='stop1' class='form-control' required>
+									<option value="" selected disabled></option>
+								{% for place in places %}
+									<option value="{{place.id}}">{{place.name}}</option>
+								{% endfor %}
+							</select>
+						</label>
+					</div>
+				</div>
+				<input type="submit" value="Submit" class="btn btn-lg btn-success" />
+			</form>
+		</div>
+
+
+	</div>
+{% endblock %}

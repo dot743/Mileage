@@ -1,0 +1,44 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="http://127.0.0.1:8000">MileageApp by Tan</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+  <ul class="navbar-nav mr-auto">
+    <li class="nav-item active">
+      <a class="nav-link" href="http://127.0.0.1:8000">Home<span class="sr-only">(current)</span></a>
+    </li>
+
+    <li class="nav-item active">
+      <a class="nav-link" href="/register">Register</a>
+    </li>
+
+    <li class="nav-item active">
+      <a class="nav-link" href="/login">Login</a>
+    </li>
+
+    <li class="nav-item active">
+      <a class="nav-link" href="/create_trip">Add Entry</a>
+    </li>
+
+    <li class="nav-item active">
+      <a class="nav-link" href="/view_mileage">View Mileage</a>
+    </li>
+
+
+
+
+  </div>
+<div class="">
+
+    <ul class="nav-item active">
+      <a class="nav-link pull-right">Logged in as:&nbsp;&nbsp;&nbsp;&nbsp; <b>{{request.user.username}}</b></a>
+    </ul>
+
+    <ul>
+      <a class="nav-link pull-right"> <a href="{% url 'logout' %}">Log Out</b></a>
+    </ul>
+</div>
+</nav>

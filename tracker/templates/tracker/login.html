@@ -1,0 +1,21 @@
+{% extends 'tracker/base.html' %}
+
+{% block content %}
+
+<div class='jumbotron'>
+	<h2>Login</h2>
+	<form action='' method='post'>
+		{% csrf_token %}
+		<label>
+			Username
+			<input name='username' type='text' class='form-control' />
+		</label>
+		<label>
+			Password
+			<input name='password' type='password' class='form-control' />
+		</label>
+		<input type='submit' value='Submit' />
+	</form>
+</div>
+
+{% endblock %}
